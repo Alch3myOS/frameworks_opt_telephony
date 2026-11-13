@@ -737,6 +737,11 @@ public class UiccController extends Handler {
                 continue;
             }
             UiccSlot slot = mUiccSlots[simTypeInfo.mPhysicalSlotIndex];
+            if (slot == null) {
+                logel("onGetSimTypeInfo: no UiccSlot yet for physical slot "
+                        + simTypeInfo.mPhysicalSlotIndex + ", skipping");
+                continue;
+            }
             int previousType = slot.getSimType();
             int[] previousSupportedTypes = slot.getSupportedSimTypes();
             slot.updateSimTypeInfo(simTypeInfo);
